@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Berhasil</title>
+
+    <link rel="icon"
+          href="{{ url_for('static', filename='logo.jpeg') }}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white shadow-xl rounded-3xl p-10 max-w-lg w-full text-center">
+
+        <div class="text-6xl mb-4">
+            ✅
+        </div>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">
+            Pendaftaran Berhasil
+        </h1>
+
+        <p class="text-gray-600 mb-6">
+            Terima kasih telah mendaftar di
+            <strong>MTs Al-Falah Penjaringan</strong>
+        </p>
+
+        <div class="bg-gray-100 rounded-2xl p-5 mb-6">
+
+            <p class="text-sm text-gray-500">
+                Nomor Pendaftaran
+            </p>
+
+            <h2 class="text-2xl font-bold text-green-600 mt-2">
+                {{ nomor_pendaftaran }}
+            </h2>
+
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-4 mb-6">
+
+            <p class="text-sm text-gray-500">
+                Nama Calon Siswa
+            </p>
+
+            <h3 class="text-lg font-semibold text-gray-800">
+                {{ nama }}
+            </h3>
+
+        </div>
+
+        <div class="flex justify-center gap-3 mt-6">
+
+            <a href="/bukti/{{ nomor_pendaftaran }}"
+            class="px-5 py-3 rounded-xl text-white font-bold"
+            style="background:#22c55e;">
+
+                Download PDF
+
+            </a>
+
+            <a href="/"
+            class="px-5 py-3 rounded-xl text-white font-bold"
+            style="background:#374151;">
+
+                Kembali
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
