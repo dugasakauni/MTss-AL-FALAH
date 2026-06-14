@@ -46,6 +46,27 @@ def init_db():
     )
     """)
 
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS pengaturan (
+        id INTEGER PRIMARY KEY,
+        status_pendaftaran TEXT NOT NULL
+    )
+    """)
+
+    cek = conn.execute(
+        "SELECT * FROM pengaturan WHERE id = 1"
+    ).fetchone()
+
+    if not cek:
+        conn.execute("""
+            INSERT INTO pengaturan
+            (id, status_pendaftaran)
+            VALUES
+            (1, 'dibuka')
+        """)
+
+    
+
     conn.commit()
     conn.close()
 
