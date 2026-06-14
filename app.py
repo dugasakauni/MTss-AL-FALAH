@@ -79,7 +79,21 @@ init_db()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+
+    conn = get_db()
+
+    status = conn.execute("""
+        SELECT status_pendaftaran
+        FROM pengaturan
+        WHERE id = 1
+    """).fetchone()
+
+    conn.close()
+
+    return render_template(
+        'index.html',
+        status=status['status_pendaftaran']
+    )
 
 # =========================
 # SIMPAN PENDAFTARAN
@@ -87,6 +101,22 @@ def index():
 
 @app.route('/daftar', methods=['POST'])
 def daftar():
+
+    conn = get_db()
+
+    status = conn.execute("""
+        SELECT status_pendaftaran
+        FROM pengaturan
+        WHERE id = 1
+    """).fetchone()
+
+    if status['status_pendaftaran'] == 'ditutup':
+        conn.close()
+
+        return """
+        <h1>Pendaftaran Ditutup</h1>
+        <p>Pendaftaran PPDB saat ini sedang ditutup oleh admin.</p>
+        """
 
     nama = request.form['nama']
     tempat_lahir = request.form['tempat_lahir']
@@ -97,7 +127,6 @@ def daftar():
     no_hp = request.form['no_hp']
     alamat = request.form['alamat']
 
-    conn = get_db()
     jumlah = conn.execute("""
     SELECT COUNT(*) as total
     FROM pendaftaran
@@ -267,12 +296,54 @@ def admin():
         ORDER BY id DESC
     """).fetchall()
 
+    status = conn.execute("""
+        SELECT status_pendaftaran
+        FROM pengaturan
+        WHERE id = 1
+    """).fetchone()
+
     conn.close()
 
     return render_template(
         'admin.html',
-        semua_siswa=semua_siswa
+        semua_siswa=semua_siswa,
+        status=status['status_pendaftaran']
     )
+
+@app.route('/ubah-status')
+def ubah_status():
+
+    if not session.get('admin'):
+        return redirect('/login')
+
+    conn = get_db()
+
+    status = conn.execute("""
+        SELECT status_pendaftaran
+        FROM pengaturan
+        WHERE id = 1
+    """).fetchone()
+
+    if status['status_pendaftaran'] == 'dibuka':
+
+        conn.execute("""
+            UPDATE pengaturan
+            SET status_pendaftaran='ditutup'
+            WHERE id=1
+        """)
+
+    else:
+
+        conn.execute("""
+            UPDATE pengaturan
+            SET status_pendaftaran='dibuka'
+            WHERE id=1
+        """)
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/admin')
 
 @app.route('/hapus/<int:id>')
 def hapus(id):
@@ -306,6 +377,8 @@ def login():
         return redirect('/login')
 
     return render_template('login.html')
+
+
 
 @app.route('/logout')
 def logout():

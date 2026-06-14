@@ -115,14 +115,65 @@
 
         </div>
 
+        <!-- STATUS PENDAFTARAN -->
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <p class="text-muted mb-1">
+                        Status Pendaftaran
+                    </p>
+
+                    {% if status == 'dibuka' %}
+
+                        <h3 class="text-success fw-bold">
+                            DIBUKA
+                        </h3>
+
+                    {% else %}
+
+                        <h3 class="text-danger fw-bold">
+                            DITUTUP
+                        </h3>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-3">
 
-        <h3 class="fw-bold m-0">
-            Data Pendaftar
-        </h3>
+        <div>
+
+            <h3 class="fw-bold m-0">
+                Data Pendaftar
+            </h3>
+
+            {% if status == 'dibuka' %}
+
+                <a href="/ubah-status"
+                class="btn btn-danger mt-2">
+                    Tutup Pendaftaran
+                </a>
+
+            {% else %}
+
+                <a href="/ubah-status"
+                class="btn btn-success mt-2">
+                    Buka Pendaftaran
+                </a>
+
+            {% endif %}
+
+        </div>
 
         <a href="/export" class="btn btn-dark">
             <i data-lucide="file-spreadsheet"></i>
