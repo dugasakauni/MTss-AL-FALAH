@@ -148,12 +148,17 @@ def bukti_pdf(nomor):
 
     content = []
 
+    logo_path = os.path.join(
+        app.root_path,
+        "static",
+        "logo.jpg"
+    )
+
     logo = Image(
-        "static/logo.jpg",
+        logo_path,
         width=70,
         height=70
     )
-
     content.append(logo)
     content.append(Spacer(1, 10))
 
