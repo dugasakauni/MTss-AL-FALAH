@@ -395,7 +395,10 @@ def export():
     for col, width in column_widths.items():
         ws.column_dimensions[col].width = width
 
-    file_name = "data_pendaftar.xlsx"
+    file_name = os.path.join(
+        app.root_path,
+        "data_pendaftar.xlsx"
+    )
     thin = Side(
         border_style="thin",
         color="000000"
