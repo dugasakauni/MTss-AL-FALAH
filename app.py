@@ -136,7 +136,10 @@ def bukti_pdf(nomor):
     if not siswa:
         return "Data tidak ditemukan"
 
-    filename = f"bukti_{nomor}.pdf"
+    filename = os.path.join(
+        app.root_path,
+        f"bukti_{nomor}.pdf"
+    )
 
     doc = SimpleDocTemplate(filename)
 
