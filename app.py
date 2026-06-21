@@ -477,25 +477,25 @@ def export():
         row_excel += 1
     
         for row in ws.iter_rows(
-        min_row=5,
-        max_row=ws.max_row,
-        min_col=1,
-        max_col=9
-    ):
-        
-        # Kolom No
-        row[0].alignment = Alignment(
-            horizontal="center",
-            vertical="top"
-        )
-
-        # Kolom lainnya
-        for cell in row[1:]:
-            cell.alignment = Alignment(
-                horizontal="left",
-                vertical="top",
-                wrap_text=True
+            min_row=5,
+            max_row=ws.max_row,
+            min_col=1,
+            max_col=9
+        ):
+            
+            # Kolom No
+            row[0].alignment = Alignment(
+                horizontal="center",
+                vertical="top"
             )
+
+            # Kolom lainnya
+            for cell in row[1:]:
+                cell.alignment = Alignment(
+                    horizontal="left",
+                    vertical="top",
+                    wrap_text=True
+                )
 
     # Atur lebar kolom
     column_widths = {
