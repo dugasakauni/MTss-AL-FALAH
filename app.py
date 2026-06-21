@@ -246,7 +246,7 @@ def bukti_pdf(nomor):
         ["Asal Sekolah", siswa['asal_sekolah']],
         ["Nama Orang Tua", siswa['nama_ortu']],
         ["No HP", siswa['no_hp']],
-        ["Alamat", siswa['alamat']]
+        ["Alamat", paragraph(str(siswa['alamat']), styles['Normal'])]
     ]
 
     table = Table(
@@ -470,7 +470,10 @@ def export():
         ws.cell(row=row_excel, column=7, value=row["nama_ortu"])
         ws.cell(row=row_excel, column=8, value=row["no_hp"])
         ws.cell(row=row_excel, column=9, value=row["alamat"])
-
+        ws.cell(row=row_excel, column=9).alignment = Alignment(
+            wrap_text=True,
+            vertical="top"
+        )
         row_excel += 1
 
     # Atur lebar kolom
