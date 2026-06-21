@@ -246,7 +246,7 @@ def bukti_pdf(nomor):
         ["Asal Sekolah", siswa['asal_sekolah']],
         ["Nama Orang Tua", siswa['nama_ortu']],
         ["No HP", siswa['no_hp']],
-        ["Alamat", paragraph(str(siswa['alamat']), styles['Normal'])]
+        ["Alamat", Paragraph(str(siswa['alamat']), styles['Normal'])]
     ]
 
     table = Table(
