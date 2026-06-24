@@ -413,7 +413,7 @@ def export():
     ws = wb.active
     ws.title = "Data Pendaftar"
     ws.merge_cells('A1:I1')
-    ws['A1'] = "DATA PENDAFTAR PPDB MTs AL-FALAH"
+    ws['A1'] = "DATA PENDAFTAR PPDB MTss AL-FALAH"
 
     ws['A1'].font = Font(
         bold=True,
